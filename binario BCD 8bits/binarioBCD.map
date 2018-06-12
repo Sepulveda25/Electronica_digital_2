@@ -1,0 +1,40 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue May 27 01:51:58 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000032
+                   .cinit    romdata   0x000019    program   0x000004
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00001a      
+            27 out of 8454 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                  CENTENA   0x000002    program     static D:\Facultad\Electronica digital 2\binario BCD 8bits\binarioBCD.asm
+                   DECENA   0x00000a    program     static D:\Facultad\Electronica digital 2\binario BCD 8bits\binarioBCD.asm
+                PRINCIPAL   0x000000    program     static D:\Facultad\Electronica digital 2\binario BCD 8bits\binarioBCD.asm
+                   UNIDAD   0x000012    program     static D:\Facultad\Electronica digital 2\binario BCD 8bits\binarioBCD.asm
+             _.org_0_0018   0x000018    program     static D:\Facultad\Electronica digital 2\binario BCD 8bits\binarioBCD.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                PRINCIPAL   0x000000    program     static D:\Facultad\Electronica digital 2\binario BCD 8bits\binarioBCD.asm
+                  CENTENA   0x000002    program     static D:\Facultad\Electronica digital 2\binario BCD 8bits\binarioBCD.asm
+                   DECENA   0x00000a    program     static D:\Facultad\Electronica digital 2\binario BCD 8bits\binarioBCD.asm
+                   UNIDAD   0x000012    program     static D:\Facultad\Electronica digital 2\binario BCD 8bits\binarioBCD.asm
+             _.org_0_0018   0x000018    program     static D:\Facultad\Electronica digital 2\binario BCD 8bits\binarioBCD.asm
+
+

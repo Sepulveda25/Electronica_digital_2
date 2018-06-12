@@ -1,0 +1,15 @@
+Warning[205] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 4 : Found directive in column 1. (__config)
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 25 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 26 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 28 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 32 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 34 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 36 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 37 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 38 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 39 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[207] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 88 : Found label after column 1. (B1)
+Warning[207] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 91 : Found label after column 1. (B2)
+Warning[207] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 94 : Found label after column 1. (B3)
+Warning[207] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 97 : Found label after column 1. (B4)
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TXTECLADO\TXTECLADO.ASM 142 : Register in operand not in bank 0.  Ensure that bank bits are correct.

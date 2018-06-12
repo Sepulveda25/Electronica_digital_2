@@ -1,0 +1,19 @@
+# MPLAB IDE generated this makefile for use with Microsoft `nmake'.
+# Project: tarea1.mcp
+# Date: Wed May 07 14:04:45 2014
+
+AS = MPASMWIN.exe
+CC = 
+LD = mplink.exe
+AR = mplib.exe
+RM = del
+
+"tarea1.cof" : "tarea1.o"
+	$(CC) /p16F877A "tarea1.o" /u_DEBUG /z__MPLAB_BUILD=1 /z__MPLAB_DEBUG=1 /o"tarea1.cof" /M"tarea1.map" /W /x
+
+"tarea1.o" : "tarea1.asm" "C:\Program Files\Microchip\MPASM Suite\P16F877A.INC"
+	$(AS) /q /p16F877A "tarea1.asm" /l"tarea1.lst" /e"tarea1.err" /d__DEBUG=1
+
+"clean" : 
+	$(CC) "tarea1.o" "tarea1.hex" "tarea1.err" "tarea1.lst" "tarea1.cof"
+

@@ -1,0 +1,62 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue Jun 10 00:37:08 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x0000a0
+   .config_2007_TECLADO.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000053      
+                            0x002007    0x002007      
+            82 out of 8454 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+             ANTIRREBOTES   0x000031    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                       B1   0x000032    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                       B2   0x000034    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                       B3   0x000036    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                       B4   0x000038    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                CHECA_COL   0x00001e    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+              DECOD_TECLA   0x00003d    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                  ESPERAR   0x00004a    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                   INICIO   0x00000f    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                PRINCIPAL   0x000018    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                     SIGO   0x00004e    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                    SIGO2   0x00004c    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                    SIGO3   0x00004a    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                  TECLADO   0x00001b    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x00000f    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                PRINCIPAL   0x000018    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                  TECLADO   0x00001b    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                CHECA_COL   0x00001e    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+             ANTIRREBOTES   0x000031    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                       B1   0x000032    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                       B2   0x000034    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                       B3   0x000036    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                       B4   0x000038    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+              DECOD_TECLA   0x00003d    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                  ESPERAR   0x00004a    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                    SIGO3   0x00004a    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                    SIGO2   0x00004c    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+                     SIGO   0x00004e    program     static D:\Facultad\Electronica digital 2\taclado matricial\teclado.asm
+
+

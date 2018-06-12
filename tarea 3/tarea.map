@@ -1,0 +1,52 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Thu May 08 14:17:39 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x00005c
+     .config_2007_TAREA.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00002d      
+                            0x002007    0x002007      
+            47 out of 8454 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     CONF   0x000000    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                  ESPERAR   0x000024    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                    IRDER   0x000009    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                    IRIZQ   0x000010    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                    LLAVE   0x000018    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                PRINCIPAL   0x000008    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                     SIGO   0x000028    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                    SIGO2   0x000026    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                    SIGO3   0x000024    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                    TABLA   0x00001c    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     CONF   0x000000    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                PRINCIPAL   0x000008    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                    IRDER   0x000009    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                    IRIZQ   0x000010    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                    LLAVE   0x000018    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                    TABLA   0x00001c    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                  ESPERAR   0x000024    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                    SIGO3   0x000024    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                    SIGO2   0x000026    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+                     SIGO   0x000028    program     static D:\Facultad\Electronica digital 2\tarea 3\tarea.asm
+
+

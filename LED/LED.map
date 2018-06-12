@@ -1,0 +1,44 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Sun May 11 18:50:22 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000036
+       .config_2007_LED.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00001a      
+                            0x002007    0x002007      
+            28 out of 8454 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                 COMIENZO   0x000008    program     static D:\Facultad\Electronica digital 2\LED\LED.asm
+                     CONF   0x000000    program     static D:\Facultad\Electronica digital 2\LED\LED.asm
+                  ESPERAR   0x00000d    program     static D:\Facultad\Electronica digital 2\LED\LED.asm
+                     SIGO   0x000013    program     static D:\Facultad\Electronica digital 2\LED\LED.asm
+                    SIGO2   0x000011    program     static D:\Facultad\Electronica digital 2\LED\LED.asm
+                    SIGO3   0x00000f    program     static D:\Facultad\Electronica digital 2\LED\LED.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     CONF   0x000000    program     static D:\Facultad\Electronica digital 2\LED\LED.asm
+                 COMIENZO   0x000008    program     static D:\Facultad\Electronica digital 2\LED\LED.asm
+                  ESPERAR   0x00000d    program     static D:\Facultad\Electronica digital 2\LED\LED.asm
+                    SIGO3   0x00000f    program     static D:\Facultad\Electronica digital 2\LED\LED.asm
+                    SIGO2   0x000011    program     static D:\Facultad\Electronica digital 2\LED\LED.asm
+                     SIGO   0x000013    program     static D:\Facultad\Electronica digital 2\LED\LED.asm
+
+

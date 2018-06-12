@@ -1,0 +1,3 @@
+Warning[205] D:\FACULTAD\ELECTRONICA DIGITAL 2\PRUEBA LED CON INTERRUP\PRUEBA LED INTE.ASM 2 : Found directive in column 1. (__config)
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\PRUEBA LED CON INTERRUP\PRUEBA LED INTE.ASM 47 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\PRUEBA LED CON INTERRUP\PRUEBA LED INTE.ASM 49 : Register in operand not in bank 0.  Ensure that bank bits are correct.

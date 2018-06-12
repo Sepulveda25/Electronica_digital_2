@@ -1,0 +1,40 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Mon Jun 09 23:04:25 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000064
+     .config_2007_RXBCD.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000035      
+                            0x002007    0x002007      
+            52 out of 8454 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+            CONFIGURACION   0x000011    program     static D:\Facultad\Electronica digital 2\txrx bcd\rx\rxbcd.asm
+                     SIGO   0x000024    program     static D:\Facultad\Electronica digital 2\txrx bcd\rx\rxbcd.asm
+                    TABLA   0x000025    program     static D:\Facultad\Electronica digital 2\txrx bcd\rx\rxbcd.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+            CONFIGURACION   0x000011    program     static D:\Facultad\Electronica digital 2\txrx bcd\rx\rxbcd.asm
+                     SIGO   0x000024    program     static D:\Facultad\Electronica digital 2\txrx bcd\rx\rxbcd.asm
+                    TABLA   0x000025    program     static D:\Facultad\Electronica digital 2\txrx bcd\rx\rxbcd.asm
+
+

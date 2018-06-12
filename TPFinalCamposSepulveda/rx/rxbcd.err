@@ -1,0 +1,16 @@
+Warning[205] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 4 : Found directive in column 1. (__config)
+Message[302] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 44 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 45 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 47 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 49 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 51 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 53 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 56 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 58 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 60 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 61 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 62 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 63 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 68 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 191 : Using default destination of 1 (file).
+Message[305] D:\FACU1\EDII\FEDE\DIGITALES 2\TXRX BCD\RX\RXBCD.ASM 214 : Using default destination of 1 (file).

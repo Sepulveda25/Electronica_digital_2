@@ -1,0 +1,19 @@
+# MPLAB IDE generated this makefile for use with Microsoft `nmake'.
+# Project: displays2.mcp
+# Date: Thu May 15 13:39:38 2014
+
+AS = MPASMWIN.exe
+CC = 
+LD = mplink.exe
+AR = mplib.exe
+RM = del
+
+"displays2.cof" : "displays2.o"
+	$(CC) /p16F877A "displays2.o" /u_DEBUG /z__MPLAB_BUILD=1 /z__MPLAB_DEBUG=1 /o"displays2.cof" /M"displays2.map" /W /x
+
+"displays2.o" : "displays2.asm" "C:\Program Files\Microchip\MPASM Suite\P16F877A.INC"
+	$(AS) /q /p16F877A "displays2.asm" /l"displays2.lst" /e"displays2.err" /d__DEBUG=1
+
+"clean" : 
+	$(CC) "displays2.o" "displays2.hex" "displays2.err" "displays2.lst" "displays2.cof"
+

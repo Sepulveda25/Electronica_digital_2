@@ -1,0 +1,68 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue Jun 10 23:38:38 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x000138
+     .config_2007_RXBCD.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x00009f      
+                            0x002007    0x002007      
+            158 out of 8454 program addresses used, program memory utilization is 1%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+            CONFIGURACION   0x000011    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                     DIS1   0x000080    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                     DIS2   0x000086    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                   ESPERA   0x00005f    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+           ESPEROYMUESTRO   0x000031    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                  INICIAL   0x00002e    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                   INICIO   0x00008d    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                     LOOP   0x00007a    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                    LUCES   0x000089    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                  MUESTRA   0x000053    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+               RUTINA_AST   0x000040    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+               RUTINA_NUM   0x000050    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+         SEGUIR_ESPERANDO   0x000092    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+             SUMADISPLAYS   0x000076    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                    TABLA   0x000065    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                TABLADISP   0x000098    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+              TESTEOTECLA   0x000036    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+            CONFIGURACION   0x000011    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                  INICIAL   0x00002e    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+           ESPEROYMUESTRO   0x000031    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+              TESTEOTECLA   0x000036    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+               RUTINA_AST   0x000040    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+               RUTINA_NUM   0x000050    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                  MUESTRA   0x000053    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                   ESPERA   0x00005f    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                    TABLA   0x000065    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+             SUMADISPLAYS   0x000076    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                     LOOP   0x00007a    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                     DIS1   0x000080    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                     DIS2   0x000086    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                    LUCES   0x000089    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                   INICIO   0x00008d    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+         SEGUIR_ESPERANDO   0x000092    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+                TABLADISP   0x000098    program     static D:\Facu1\EDII\fede\digitales 2\txrx bcd\rx\rxbcd.asm
+
+

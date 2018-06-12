@@ -1,0 +1,3 @@
+Warning[205] D:\FACULTAD\ELECTRONICA DIGITAL 2\TAREA 3\TAREA.ASM 2 : Found directive in column 1. (__config)
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TAREA 3\TAREA.ASM 16 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TAREA 3\TAREA.ASM 19 : Register in operand not in bank 0.  Ensure that bank bits are correct.

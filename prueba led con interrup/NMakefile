@@ -1,0 +1,19 @@
+# MPLAB IDE generated this makefile for use with Microsoft `nmake'.
+# Project: prueba led inte.mcp
+# Date: Wed Jun 04 03:03:29 2014
+
+AS = MPASMWIN.exe
+CC = 
+LD = mplink.exe
+AR = mplib.exe
+RM = del
+
+"prueba led inte.cof" : "prueba led inte.o"
+	$(CC) /p16F877A "prueba led inte.o" /u_DEBUG /z__MPLAB_BUILD=1 /z__MPLAB_DEBUG=1 /o"prueba led inte.cof" /M"prueba led inte.map" /W /x
+
+"prueba led inte.o" : "prueba led inte.asm" "C:\Program Files\Microchip\MPASM Suite\P16F877A.INC"
+	$(AS) /q /p16F877A "prueba led inte.asm" /l"prueba led inte.lst" /e"prueba led inte.err" /d__DEBUG=1
+
+"clean" : 
+	$(CC) "prueba led inte.o" "prueba led inte.hex" "prueba led inte.err" "prueba led inte.lst" "prueba led inte.cof"
+

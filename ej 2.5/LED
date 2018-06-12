@@ -1,0 +1,36 @@
+;Retardo de 1 segundo
+#INCLUDE "P16F877A.INC"
+
+
+
+DEC1	EQU	0X20
+DEC2	EQU	0X21
+DEC3	EQU 0X22
+
+	
+		ORG 0X00
+
+
+CONF:
+		BSF		STATUS,RP0  ;estamos en banco 1
+		MOVLW 	0x06
+		MOVWF	ADCON1    ; paso de analogico a digital	
+
+	
+		MOVLW 0X0A
+		MOVWF DEC3
+SIGO3:	
+		MOVLW 0X64
+		MOVWF DEC2
+SIGO2:
+		MOVLW 0XF9
+		MOVWF DEC1
+SIGO:
+		NOP
+		DECFSZ DEC1,F
+		GOTO SIGO
+		DECFSZ DEC2,F
+		GOTO SIGO2
+		DECFSZ DEC3,F
+		GOTO SIGO3
+		END

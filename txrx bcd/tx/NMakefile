@@ -1,0 +1,19 @@
+# MPLAB IDE generated this makefile for use with Microsoft `nmake'.
+# Project: txbcd.mcp
+# Date: Wed May 21 13:59:33 2014
+
+AS = MPASMWIN.exe
+CC = 
+LD = mplink.exe
+AR = mplib.exe
+RM = del
+
+"txbcd.cof" : "txbcd.o"
+	$(CC) /p16F877A "txbcd.o" /u_DEBUG /z__MPLAB_BUILD=1 /z__MPLAB_DEBUG=1 /o"txbcd.cof" /M"txbcd.map" /W /x
+
+"txbcd.o" : "txbcd.asm" "C:\Program Files\Microchip\MPASM Suite\P16F877A.INC"
+	$(AS) /q /p16F877A "txbcd.asm" /l"txbcd.lst" /e"txbcd.err" /d__DEBUG=1
+
+"clean" : 
+	$(CC) "txbcd.o" "txbcd.hex" "txbcd.err" "txbcd.lst" "txbcd.cof"
+

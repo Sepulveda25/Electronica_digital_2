@@ -1,0 +1,11 @@
+Warning[205] D:\FACULTAD\ELECTRONICA DIGITAL 2\RECEPTOR\RX.ASM 4 : Found directive in column 1. (__config)
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\RECEPTOR\RX.ASM 38 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\RECEPTOR\RX.ASM 39 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\RECEPTOR\RX.ASM 41 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\RECEPTOR\RX.ASM 44 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\RECEPTOR\RX.ASM 48 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\RECEPTOR\RX.ASM 50 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\RECEPTOR\RX.ASM 51 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\RECEPTOR\RX.ASM 52 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\RECEPTOR\RX.ASM 53 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\RECEPTOR\RX.ASM 58 : Register in operand not in bank 0.  Ensure that bank bits are correct.

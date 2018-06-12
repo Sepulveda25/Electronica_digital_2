@@ -1,0 +1,11 @@
+Warning[205] D:\FACULTAD\ELECTRONICA DIGITAL 2\TRANSMISOR\TX.ASM 4 : Found directive in column 1. (__config)
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TRANSMISOR\TX.ASM 33 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TRANSMISOR\TX.ASM 34 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TRANSMISOR\TX.ASM 36 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TRANSMISOR\TX.ASM 41 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TRANSMISOR\TX.ASM 45 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TRANSMISOR\TX.ASM 47 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TRANSMISOR\TX.ASM 48 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TRANSMISOR\TX.ASM 49 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TRANSMISOR\TX.ASM 50 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TRANSMISOR\TX.ASM 103 : Register in operand not in bank 0.  Ensure that bank bits are correct.

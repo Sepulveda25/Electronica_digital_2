@@ -1,0 +1,5 @@
+Warning[205] D:\FACULTAD\ELECTRONICA DIGITAL 2\DISPALYS 2\DISPLAYS2.ASM 3 : Found directive in column 1. (__config)
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\DISPALYS 2\DISPLAYS2.ASM 25 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\DISPALYS 2\DISPLAYS2.ASM 28 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\DISPALYS 2\DISPLAYS2.ASM 30 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\DISPALYS 2\DISPLAYS2.ASM 32 : Register in operand not in bank 0.  Ensure that bank bits are correct.

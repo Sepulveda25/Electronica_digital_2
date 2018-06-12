@@ -1,0 +1,46 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Thu May 15 12:38:19 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000072
+  .config_2007_DISPLAYS.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000038      
+                            0x002007    0x002007      
+            58 out of 8454 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+          CARGA_REGISTROS   0x00000d    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+                     CONF   0x000000    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+                  ESPERAR   0x000024    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+                PRINCIPAL   0x000015    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+                    TABLA   0x00002a    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+                   TIEMPO   0x000035    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+                   VUELVO   0x00001d    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     CONF   0x000000    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+          CARGA_REGISTROS   0x00000d    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+                PRINCIPAL   0x000015    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+                   VUELVO   0x00001d    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+                  ESPERAR   0x000024    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+                    TABLA   0x00002a    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+                   TIEMPO   0x000035    program     static D:\Facultad\Electronica digital 2\displays\displays.asm
+
+

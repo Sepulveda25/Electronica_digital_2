@@ -1,0 +1,649 @@
+MPASM  5.51                     TXTECLADO.ASM   6-12-2014  17:14:19         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;TRANSMISOR
+                      00002 #INCLUDE "P16F877A.INC"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F877A processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00566         LIST
+                      00003 
+Warning[205]: Found directive in column 1. (__config)
+2007   3F31           00004 __config _XT_OSC & _WDT_OFF & _LVP_OFF & _CP_OFF & _BODEN_OFF & _PWRTE_ON
+                      00005 
+  00000020            00006 REG1    EQU             0X20
+  00000021            00007 REG2    EQU             0X21
+  00000022            00008 REG3    EQU             0X22
+  00000023            00009 TX              EQU             0X23
+                      00010 
+  00000030            00011 TECLA           EQU     0X30
+  00000031            00012 DEC1            EQU     0X31
+  00000032            00013 DEC2            EQU 0X32
+  00000033            00014 BANDERA         EQU     0X33
+  00000034            00015 TEMP_W          EQU     0X34
+  00000035            00016 TEMP_STATUS     EQU     0X35
+  00000026            00017 COMP1           EQU 0X26
+                      00018         
+                      00019         ORG 0X00
+0000   2???           00020         GOTO CONFIGURACION
+0001                  00021 CONFIGURACION:
+                      00022 
+0001   1683           00023         BSF    STATUS,RP0       ; Pongo 1 en el RP0 de status
+0002   1303           00024         BCF    STATUS,RP1       ; Pongo 0 en RP1 y estoy en banco 1.
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0003   1787           00025         BSF             TRISC,7                 ;RX SERIAL (ENTRADA)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0004   1307           00026         BCF             TRISC,6                 ;TX SERIAL (SALIDA)
+0005   3019           00027         MOVLW   0X19                    ; CARGO AL REGISTRO SPBRG CON 25 PARA TENER EL MENOR PORCENTAJE 
+                            DE BITS ERRADOS SEGUN EL CALCULO
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0006   0099           00028         MOVWF   SPBRG
+                      00029         
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0007   138C           00030         BCF             PIE1,7;DESHABILITO  INTERRUPCIONES POR PS
+                      00031 ;COFIGURO ENTRADAS
+0008   30F0           00032         MOVLW   0XF0    
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0009   0086           00033         MOVWF   TRISB   
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000A   0188           00034         CLRF    TRISD
+                      00035         
+                      00036 ;CONFIGURO EL REGISTO TXSTA 
+MPASM  5.51                     TXTECLADO.ASM   6-12-2014  17:14:19         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000B   0198           00037         CLRF    TXSTA
+                      00038 ;       BCF             TXSTA,7
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000C   1318           00039         BCF             TXSTA,6;        ES PARA EL 9no BIT (8 BIT EN ESTE CASO)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000D   1698           00040         BSF             TXSTA,5; HABILITO EL TRANSMISOR
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000E   1518           00041         BSF             TXSTA,2 ;SELECCIONO LA VELOCIDAD ALTA
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000F   1218           00042         BCF             TXSTA,4;LO PONES EN MODO ASINCRONICO
+                      00043 
+                      00044 ;CONFIGURO EL REGISTRO RCSTA
+0010   1283           00045         BCF    STATUS,RP0     ; Pongo 0 en el RP0 de status y estoy en banco 0.
+0011   1798           00046         BSF             RCSTA,7 ; HABILITO TODO EL MODULO PARA COMUNICACION SERIAL
+0012   1318           00047         BCF             RCSTA,6; DESABILITO RX DEL BIT 9
+0013   1618           00048         BSF             RCSTA,4 ; HABILITO LA RECEPCION 
+                      00049 ;*********************************************************************************
+                      00050 
+0014                  00051 PRINCIPAL
+                      00052 
+0014   2???           00053         CALL    TECLADO ; Llamar a rutina de teclado
+0015   0088           00054         MOVWF   PORTD ; Muestra en display lo que enviamos
+0016   2???           00055         CALL    ENVIO
+0017   2???           00056         GOTO    PRINCIPAL ; Ejecucion ciclica del programa
+0018                  00057 TECLADO 
+0018   01B0           00058         CLRF    TECLA ; Limpiar variable TECLA
+0019   300E           00059         MOVLW   b'00001110' ; Poner un cero en la primer
+001A   0086           00060         MOVWF   PORTB ; fila del puerto B (RB0)
+001B                  00061 CHEC_COL
+001B   1E06           00062         BTFSS   PORTB,4 ; Si la 1er columna es "0"
+001C   2???           00063         GOTO    ANTIRREBOTES ; salta a la rutina ANTIRREBOTES
+001D   0AB0           00064         INCF    TECLA,F ; Si es "1" incrementa TECLA
+001E   1E86           00065         BTFSS   PORTB,5 ; Si la 2da columna es "0"
+001F   2???           00066         GOTO    ANTIRREBOTES ; salta a la rutina ANTIRREBOTES
+0020   0AB0           00067         INCF    TECLA,F ; Si es "1" incrementa TECLA
+0021   1F06           00068         BTFSS   PORTB,6 ; Si la 3er columna es "0"
+0022   2???           00069         GOTO    ANTIRREBOTES ; salta a la rutina ANTIRREBOTES
+0023   0AB0           00070         INCF    TECLA,F ; Si es "1" incrementa TECLA
+0024   1F86           00071         BTFSS   PORTB,7 ; Si la 4ta columna es "0"
+0025   2???           00072         GOTO    ANTIRREBOTES ; salta a la rutina ANTIRREBOTES
+0026   0AB0           00073         INCF    TECLA,F ; Si es "1" incrementa TECLA
+                      00074 
+0027   300C           00075         MOVLW   d'12'  ; testea si recorrio todas las teclas
+0028   0230           00076         SUBWF   TECLA,W
+0029   1903           00077         BTFSC   STATUS,Z
+002A   2???           00078         GOTO    TECLADO
+002B   1403           00079         BSF             STATUS,C
+002C   0D86           00080         RLF             PORTB,F
+002D   2???           00081         GOTO    CHEC_COL
+                      00082 
+002E                  00083 ANTIRREBOTES    ; testeo si se dejo de presionar la tecla                       
+002E   2???           00084         CALL    ESPERAR ;
+MPASM  5.51                     TXTECLADO.ASM   6-12-2014  17:14:19         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[207]: Found label after column 1. (B1)
+002F                  00085         B1 
+002F   1E06           00086                 BTFSS   PORTB,4
+0030   2???           00087                 GOTO    B1
+Warning[207]: Found label after column 1. (B2)
+0031                  00088         B2 
+0031   1E86           00089                 BTFSS   PORTB,5
+0032   2???           00090                 GOTO    B2
+Warning[207]: Found label after column 1. (B3)
+0033                  00091         B3 
+0033   1F06           00092                 BTFSS   PORTB,6
+0034   2???           00093                 GOTO    B3
+Warning[207]: Found label after column 1. (B4)
+0035                  00094         B4 
+0035   1F86           00095                 BTFSS   PORTB,7
+0036   2???           00096                 GOTO    B4
+                      00097 
+0037   0830           00098                 MOVF    TECLA,W
+0038   2???           00099                 CALL    DECOD_TECLA
+0039   0008           00100                 RETURN
+                      00101 
+003A                  00102 DECOD_TECLA
+003A   0782           00103                 ADDWF   PCL,f
+003B   3401           00104                 RETLW   0X01
+003C   3404           00105                 RETLW   0X04
+003D   3407           00106                 RETLW   0X07
+003E   340A           00107                 RETLW   0X0A
+003F   3402           00108                 RETLW   0X02
+0040   3405           00109                 RETLW   0X05
+0041   3408           00110                 RETLW   0X08
+0042   3400           00111                 RETLW   0X00
+0043   3403           00112                 RETLW   0X03
+0044   3406           00113                 RETLW   0X06
+0045   3409           00114                 RETLW   0X09
+0046   340B           00115                 RETLW   0X0B
+                      00116 
+0047                  00117 ESPERAR:        ; espera de 255mS
+                      00118 
+0047                  00119 SIGO3:
+0047   30FF           00120                 MOVLW 0XFF
+0048   00B2           00121                 MOVWF DEC2
+0049                  00122 SIGO2:
+0049   30F9           00123                 MOVLW 0XF9
+004A   00B1           00124                 MOVWF DEC1
+004B                  00125 SIGOO:
+004B   0000           00126                 NOP
+004C   0BB1           00127                 DECFSZ  DEC1,F
+004D   2???           00128                 GOTO    SIGOO
+004E   0BB2           00129                 DECFSZ  DEC2,F
+004F   2???           00130                 GOTO    SIGO2
+0050   0008           00131                 RETURN
+                      00132 
+0051                  00133 ENVIO:
+MPASM  5.51                     TXTECLADO.ASM   6-12-2014  17:14:19         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00134 
+0051   00A3           00135         MOVWF           TX
+0052   2???           00136         CALL            TABLA
+0053   0088           00137         MOVWF           PORTD   ; Muestra en display lo que enviamos
+0054   0823           00138         MOVF            TX,W    
+0055   1683 1303      00139         BANKSEL         TXSTA   
+                      00140 
+0057                  00141 ESPERO:                 
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0057   1C98           00142         BTFSS           TXSTA,1;ESPERA QUE SE HAYA ENVIADO EL BYTE ANTERIOR PARA ENVIAR UNO NUEVO
+0058   2???           00143         GOTO            ESPERO
+0059   1283 1303      00144         BANKSEL         TXREG   
+005B   0099           00145         MOVWF           TXREG;NI BIEN MUEVE W A TXREG  TE LO ENVIA
+005C   0008           00146         RETURN
+                      00147 
+                      00148 
+005D                  00149 TABLA:
+005D   0782           00150                 ADDWF   PCL,F
+005E   3440           00151                 RETLW   B'01000000';0
+005F   3479           00152                 RETLW   B'01111001';1
+0060   3424           00153                 RETLW   B'00100100';2
+0061   3430           00154                 RETLW   B'00110000';3
+0062   3419           00155                 RETLW   B'00011001';4
+0063   3412           00156                 RETLW   B'00010010';5
+0064   3403           00157                 RETLW   B'00000011';6
+0065   3478           00158                 RETLW   B'01111000';7
+0066   3400           00159                 RETLW   B'00000000';8
+0067   3418           00160                 RETLW   B'00011000';9
+                      00161 
+0068   3408           00162                 RETLW   B'00001000';A
+0069   3409           00163                 RETLW   B'00001001';H
+006A   3446           00164                 RETLW   B'01000110';C
+006B   3440           00165                 RETLW   B'01000000';D
+006C   3406           00166                 RETLW   B'00000110';E
+006D   340E           00167                 RETLW   B'00001110';F
+                      00168 
+3F31                  00169         END                             
+MPASM  5.51                     TXTECLADO.ASM   6-12-2014  17:14:19         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANTIRREBOTES                      0000002E
+B1                                0000002F
+B2                                00000031
+B3                                00000033
+B4                                00000035
+BANDERA                           00000033
+BCLIE                             00000003
+BCLIF                             00000003
+BF                                00000000
+BRGH                              00000002
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2                             0000001B
+CCPR2H                            0000001C
+MPASM  5.51                     TXTECLADO.ASM   6-12-2014  17:14:19         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CCPR2L                            0000001B
+CHEC_COL                          0000001B
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CIS                               00000003
+CKE                               00000006
+CKP                               00000004
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000009C
+CMIE                              00000006
+CMIF                              00000006
+COMP1                             00000026
+CONFIGURACION                     00000001
+CREN                              00000004
+CSRC                              00000007
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            0000009D
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+DEC1                              00000031
+DEC2                              00000032
+DECOD_TECLA                       0000003A
+D_A                               00000005
+D_NOT_A                           00000005
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+ENVIO                             00000051
+ESPERAR                           00000047
+ESPERO                            00000057
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GCEN                              00000007
+GIE                               00000007
+GO                                00000002
+GO_DONE                           00000002
+MPASM  5.51                     TXTECLADO.ASM   6-12-2014  17:14:19         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+GO_NOT_DONE                       00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+IBF                               00000007
+IBOV                              00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OBF                               00000006
+OERR                              00000001
+OPTION_REG                        00000081
+P                                 00000004
+PCFG0                             00000000
+PCFG1                             00000001
+PCFG2                             00000002
+PCFG3                             00000003
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PRINCIPAL                         00000014
+PS0                               00000000
+PS1                               00000001
+MPASM  5.51                     TXTECLADO.ASM   6-12-2014  17:14:19         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PS2                               00000002
+PSA                               00000003
+PSPIE                             00000007
+PSPIF                             00000007
+PSPMODE                           00000004
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RD0                               00000000
+RD1                               00000001
+RD2                               00000002
+RD3                               00000003
+RD4                               00000004
+RD5                               00000005
+RD6                               00000006
+RD7                               00000007
+RE0                               00000000
+RE1                               00000001
+RE2                               00000002
+READ_WRITE                        00000002
+REG1                              00000020
+REG2                              00000021
+MPASM  5.51                     TXTECLADO.ASM   6-12-2014  17:14:19         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+REG3                              00000022
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SEN                               00000000
+SIGO2                             00000049
+SIGO3                             00000047
+SIGOO                             0000004B
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TABLA                             0000005D
+TECLA                             00000030
+TECLADO                           00000018
+TEMP_STATUS                       00000035
+TEMP_W                            00000034
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+MPASM  5.51                     TXTECLADO.ASM   6-12-2014  17:14:19         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRISD                             00000088
+TRISD0                            00000000
+TRISD1                            00000001
+TRISD2                            00000002
+TRISD3                            00000003
+TRISD4                            00000004
+TRISD5                            00000005
+TRISD6                            00000006
+TRISD7                            00000007
+TRISE                             00000089
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+MPASM  5.51                     TXTECLADO.ASM   6-12-2014  17:14:19         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRMT                              00000001
+TX                                00000023
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+W                                 00000000
+WCOL                              00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00001FFF
+_CP_OFF                           00003FFF
+_CP_ON                            00001FFF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
+_WRT_256                          00003DFF
+_WRT_HALF                         000039FF
+MPASM  5.51                     TXTECLADO.ASM   6-12-2014  17:14:19         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FFD
+__16F877A                         00000001
+__DEBUG                           1
+
+Errors   :     0
+Warnings :     5 reported,     0 suppressed
+Messages :    12 reported,     0 suppressed
+
+

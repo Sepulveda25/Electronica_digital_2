@@ -1,0 +1,729 @@
+MPASM  5.51                         RXBCD.ASM   6-10-2014  23:38:37         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;RECEPTOR
+                      00002 #INCLUDE "P16F877A.INC"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F877A processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00566         LIST
+                      00003 
+Warning[205]: Found directive in column 1. (__config)
+2007   3F31           00004 __config _XT_OSC & _WDT_OFF & _LVP_OFF & _CP_OFF & _BODEN_OFF & _PWRTE_ON
+                      00005 
+                      00006 
+  00000021            00007 DIS_LOW                 EQU             0X21
+  00000022            00008 DIS_HIGH                        EQU             0X22
+  00000023            00009 RECIBO                          EQU             0X23
+  00000024            00010 TEMP_W                          EQU             0X24
+  00000025            00011 TEMP_STATUS             EQU             0X25    
+  00000026            00012 FLAG                            EQU             0X26
+  00000027            00013 ACU                                     EQU             0x27
+  00000028            00014 CONT                            EQU             0X28
+  00000028            00015 NUMDISP                 EQU             0X28
+  00000029            00016 CONT_TMR0                       EQU             0X29
+0000                  00017         ORG 0X00
+                      00018         
+0000   2811           00019         GOTO CONFIGURACION
+                      00020 
+0004                  00021         ORG 0X04
+0004   00A4           00022         MOVWF   TEMP_W          ;***************************
+0005   0E03           00023         SWAPF   STATUS,W        ;SE GUARDA W Y STATUS
+0006   00A5           00024         MOVWF   TEMP_STATUS     ;*****************************
+                      00025 
+0007   1283 1303      00026         BANKSEL RCREG   ;**************************************************
+0009   081A           00027         MOVF    RCREG,W ;LO QUE SE RECIVE SE MUESTRA EN EL PUERTOB
+                      00028 ;       CALL    TABLA   ;PARA MOSTRAR EN UN DISPLAYS
+000A   00A3           00029         MOVWF   RECIBO  ;**************************************************
+000B   1426           00030         BSF             FLAG,0 ; SETEAMOS LA BANDERA PARA INDICAR QUE SE PRESIONO UNA TECLA
+                      00031         
+000C   0E25           00032         SWAPF   TEMP_STATUS,W   ;**************************************
+000D   0083           00033         MOVWF   STATUS                  ;SE RECUPERA W Y STATUS
+000E   0EA4           00034         SWAPF   TEMP_W,F                ;
+000F   0E24           00035         SWAPF   TEMP_W,W                ;**************************************
+0010   0009           00036         RETFIE
+                      00037                 
+                      00038 
+                      00039         
+0011                  00040 CONFIGURACION:
+                      00041 
+0011   1683           00042         BSF    STATUS,RP0     ; Pongo 1 en el RP0 de status
+0012   1303           00043         BCF    STATUS,RP1       ; Pongo 0 en RP1 y estoy en banco 1.
+MPASM  5.51                         RXBCD.ASM   6-10-2014  23:38:37         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0013   1787           00044         BSF             TRISC,7 ;RX SERIAL (ENTRADA)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0014   1307           00045         BCF             TRISC,6 ;TX SERIAL (SALIDA)
+0015   3019           00046         MOVLW   0X19 ; CARGO AL REGISTRO SPBRG CON 25 PARA TENER EL MENOR PORCENTAJE DE BITS ERRADOS SEG
+                            UN EL CALCULO
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0016   0099           00047         MOVWF   SPBRG
+0017   3085           00048         MOVLW   B'10000101'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0018   0081           00049         MOVWF   OPTION_REG
+0019   3006           00050         MOVLW   0X06 ;  =.6
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001A   009F           00051         MOVWF   ADCON1
+001B   30FC           00052         MOVLW   0XFC ;1111
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001C   0085           00053         MOVWF   TRISA
+                      00054 
+                      00055 ;COFIGURO SALIDAS
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001D   0186           00056         CLRF    TRISB ; TODAS SALIDAS
+                      00057 ;CONFIFIRO EL REGISTO TXSTA 
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001E   0198           00058         CLRF    TXSTA
+                      00059 ;       BCF             TXSTA,7
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001F   1318           00060         BCF             TXSTA,6;        ES PARA EL 9no BIT (8 BIT EN ESTE CASO)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0020   1698           00061         BSF             TXSTA,5; HABILITO EL TRANSMISOR
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0021   1518           00062         BSF             TXSTA,2 ;SELECCIONO LA VELOCIDAD ALTA
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0022   1218           00063         BCF             TXSTA,4;LO PONES EN MODO ASINCRONICO
+                      00064 
+                      00065 ;INTERRUPCION POR RECEPCION     
+0023   30C0           00066         MOVLW   0XC0 
+0024   008B           00067         MOVWF   INTCON ; HABILITO LAS INTERRUPCIONES GLOBALES
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0025   168C           00068         BSF             PIE1,5;HABILITA QUE SE TE INTERRUMPA CUANDO RECIBE
+                      00069 
+                      00070 ;CONFIGURO EL REGISTRO RCSTA
+0026   1283           00071         BCF     STATUS,RP0     ; Pongo 0 en el RP0 de status y estoy en banco 0.
+0027   1798           00072         BSF             RCSTA,7 ; HABILITO TODO EL MODULO PARA COMUNICACION SERIAL
+0028   1318           00073         BCF             RCSTA,6; DESABILITO RX DEL BIT 9
+0029   1618           00074         BSF             RCSTA,4 ; HABILITO LA RECEPCION 
+                      00075         
+002A   01A1           00076         CLRF    DIS_LOW
+002B   01A2           00077         CLRF    DIS_HIGH
+                      00078 
+002C   3064           00079         MOVLW   D'100' ;    PARA UN TIEMPO DE 10ms
+002D   0081           00080         MOVWF   TMR0
+                      00081 
+                      00082 ;*********************************************************************************
+MPASM  5.51                         RXBCD.ASM   6-10-2014  23:38:37         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00083 ; rutina inicial para la comparacion de si es * o #
+                      00084 ;*********************************************************************************
+                      00085 
+002E                  00086 INICIAL: 
+002E   1C26           00087         BTFSS   FLAG,0 ; CONTROLA SI SE INTRODUJO UN NUMERO
+002F   2831           00088         GOTO    ESPEROYMUESTRO  ;SIGO ESPERANDO FLAG MIENTRAS TANTO MUESTRO LOS REGISTROS
+0030   2836           00089         GOTO    TESTEOTECLA                     ;TESTEO SI FUE * SINO TESTEO SI FUE #
+0031                  00090 ESPEROYMUESTRO:
+0031   1CA6           00091         BTFSS   FLAG,1
+0032   2053           00092         CALL    MUESTRA
+0033   18A6           00093         BTFSC   FLAG,1
+0034   2089           00094         CALL    LUCES
+0035   282E           00095         GOTO    INICIAL
+0036                  00096 TESTEOTECLA:
+0036   1026           00097         BCF             FLAG,0
+0037   300A           00098         MOVLW   0X0A
+0038   0223           00099         SUBWF   RECIBO,W
+0039   1903           00100         BTFSC   STATUS,Z  ; compara si es * 
+003A   2840           00101         GOTO    RUTINA_AST
+003B   300B           00102         MOVLW   0X0B
+003C   0223           00103         SUBWF   RECIBO,W
+003D   1D03           00104         BTFSS   STATUS,Z  ; compara si es #
+003E   282E           00105         GOTO    INICIAL
+003F   2850           00106         GOTO    RUTINA_NUM
+                      00107 
+0040                  00108 RUTINA_AST:
+0040   2053           00109         CALL    MUESTRA
+0041   1C26           00110         BTFSS   FLAG,0
+0042   2840           00111         GOTO    RUTINA_AST
+                      00112 
+0043   300A           00113         MOVLW   0X0A
+0044   0223           00114         SUBWF   RECIBO,W
+0045   1903           00115         BTFSC   STATUS,Z  ; compara si es * 
+0046   2840           00116         GOTO    RUTINA_AST
+0047   300B           00117         MOVLW   0X0B
+0048   0223           00118         SUBWF   RECIBO,W
+0049   1903           00119         BTFSC   STATUS,Z  ; compara si es #
+004A   2850           00120         GOTO    RUTINA_NUM
+                      00121         
+004B   1026           00122         BCF             FLAG,0
+004C   10A6           00123         BCF             FLAG,1
+                      00124         
+                      00125         
+004D   2076           00126         CALL    SUMADISPLAYS;   SUMO EL NUMERO QUE LLEGO POR LA COMUNICACION SERIE
+004E   2053           00127         CALL    MUESTRA
+004F   282E           00128         GOTO    INICIAL
+0050                  00129 RUTINA_NUM:             
+0050   14A6           00130         BSF             FLAG,1
+0051   2089           00131         CALL    LUCES
+0052   282E           00132         GOTO    INICIAL
+                      00133 
+0053                  00134 MUESTRA:        
+0053   30FE           00135         MOVLW   0XFE
+MPASM  5.51                         RXBCD.ASM   6-10-2014  23:38:37         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0054   0085           00136         MOVWF   PORTA 
+0055   0821           00137         MOVF    DIS_LOW,W
+0056   2065           00138         CALL    TABLA
+0057   0086           00139         MOVWF   PORTB           
+0058   205F           00140         CALL    ESPERA
+0059   0985           00141         COMF    PORTA,F
+005A   0822           00142         MOVF    DIS_HIGH,W
+005B   2065           00143         CALL    TABLA
+005C   0086           00144         MOVWF   PORTB
+005D   205F           00145         CALL    ESPERA
+005E   0008           00146         RETURN
+                      00147 
+005F                  00148 ESPERA
+005F   1D0B           00149         BTFSS   INTCON,TMR0IF
+0060   285F           00150         GOTO    ESPERA
+0061   3064           00151         MOVLW   D'100'
+0062   0081           00152         MOVWF   TMR0
+0063   110B           00153         BCF             INTCON,2
+0064   0008           00154         RETURN
+                      00155                 
+                      00156 
+0065                  00157 TABLA:
+0065   0782           00158                 ADDWF   PCL,F
+0066   3440           00159                 RETLW   B'01000000';0
+0067   3479           00160                 RETLW   B'01111001';1
+0068   3424           00161                 RETLW   B'00100100';2
+0069   3430           00162                 RETLW   B'00110000';3
+006A   3419           00163                 RETLW   B'00011001';4
+006B   3412           00164                 RETLW   B'00010010';5
+006C   3403           00165                 RETLW   B'00000011';6
+006D   3478           00166                 RETLW   B'01111000';7
+006E   3400           00167                 RETLW   B'00000000';8
+006F   3418           00168                 RETLW   B'00011000';9
+                      00169 
+0070   3408           00170                 RETLW   B'00001000';A
+0071   3400           00171                 RETLW   B'00000000';B
+0072   3446           00172                 RETLW   B'01000110';C
+0073   3440           00173                 RETLW   B'01000000';D
+0074   3406           00174                 RETLW   B'00000110';E
+0075   340E           00175                 RETLW   B'00001110';F
+                      00176                                 
+                      00177 
+                      00178 
+0076                  00179 SUMADISPLAYS:
+0076   0823           00180                 MOVF    RECIBO,W
+0077   00A8           00181                 MOVWF   CONT
+0078   1903           00182                 BTFSC   STATUS,Z ;me fijo que lo que recibi es distinto de cero
+0079   0008           00183                 RETURN  
+007A   0AA1           00184 LOOP:   INCF            DIS_LOW,F
+007B   300A           00185                 MOVLW   D'10'
+007C   0221           00186                 SUBWF   DIS_LOW,W 
+007D   1D03           00187                 BTFSS   STATUS,Z  
+007E   2886           00188                 GOTO    DIS2
+MPASM  5.51                         RXBCD.ASM   6-10-2014  23:38:37         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+007F   2880           00189                 GOTO    DIS1
+0080   01A1           00190 DIS1:   CLRF    DIS_LOW
+Message[305]: Using default destination of 1 (file).
+0081   0AA2           00191                 INCF            DIS_HIGH
+0082   300A           00192                 MOVLW   D'10'
+0083   0222           00193                 SUBWF   DIS_HIGH,W
+0084   1903           00194                 BTFSC   STATUS,Z
+0085   01A2           00195                 CLRF    DIS_HIGH
+0086   0BA8           00196 DIS2:   DECFSZ  CONT,F
+0087   287A           00197                 GOTO    LOOP
+0088   0008           00198                 RETURN
+                      00199 
+                      00200 
+0089                  00201 LUCES:
+0089   1005           00202                 BCF             PORTA,0 ; PRENDER LOS DOS DISPLAYS
+008A   1085           00203                 BCF             PORTA,1
+008B   3006           00204                 MOVLW   D'6'
+008C   00A8           00205                 MOVWF   NUMDISP ;NUMERO QUE IDENTIFICA DISPLAY 7 SEGMENTOS
+008D                  00206 INICIO:
+008D   300A           00207                 MOVLW   D'10'
+008E   00A9           00208                 MOVWF   CONT_TMR0
+008F   0828           00209                 MOVF    NUMDISP,W
+0090   2098           00210                 CALL    TABLADISP
+0091   0086           00211                 MOVWF   PORTB
+0092                  00212 SEGUIR_ESPERANDO:
+0092   205F           00213                 CALL    ESPERA
+Message[305]: Using default destination of 1 (file).
+0093   0BA9           00214                 DECFSZ  CONT_TMR0 ; DECREMENTA CONT_TMR0=50 PARA HACER DEMORA DE MEDIO SEGUNDO
+0094   2892           00215                 GOTO    SEGUIR_ESPERANDO
+0095   0BA8           00216                 DECFSZ  NUMDISP,F        ; si ya recorrio todos los leds reinicia, sino sigue recorriend
+                            o
+0096   288D           00217                 GOTO    INICIO  
+0097   0008           00218                 RETURN          
+                      00219 
+0098                  00220 TABLADISP:
+0098   0782           00221                 ADDWF   PCL,F
+0099   34FF           00222                 RETLW   B'11111111'
+009A   347E           00223                 RETLW   B'01111110'
+009B   347D           00224                 RETLW   B'01111101'
+009C   347B           00225                 RETLW   B'01111011'
+009D   3477           00226                 RETLW   B'01110111'
+009E   346F           00227                 RETLW   B'01101111'
+009F   345F           00228                 RETLW   B'01011111'
+                      00229 
+                      00230                 END     
+MPASM  5.51                         RXBCD.ASM   6-10-2014  23:38:37         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ACU                               00000027
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+BCLIE                             00000003
+BCLIF                             00000003
+BF                                00000000
+BRGH                              00000002
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2                             0000001B
+CCPR2H                            0000001C
+CCPR2L                            0000001B
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CIS                               00000003
+MPASM  5.51                         RXBCD.ASM   6-10-2014  23:38:37         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CKE                               00000006
+CKP                               00000004
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000009C
+CMIE                              00000006
+CMIF                              00000006
+CONFIGURACION                     00000011
+CONT                              00000028
+CONT_TMR0                         00000029
+CREN                              00000004
+CSRC                              00000007
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            0000009D
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+DIS1                              00000080
+DIS2                              00000086
+DIS_HIGH                          00000022
+DIS_LOW                           00000021
+D_A                               00000005
+D_NOT_A                           00000005
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+ESPERA                            0000005F
+ESPEROYMUESTRO                    00000031
+F                                 00000001
+FERR                              00000002
+FLAG                              00000026
+FSR                               00000004
+GCEN                              00000007
+GIE                               00000007
+GO                                00000002
+GO_DONE                           00000002
+GO_NOT_DONE                       00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+MPASM  5.51                         RXBCD.ASM   6-10-2014  23:38:37         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+I2C_STOP                          00000004
+IBF                               00000007
+IBOV                              00000005
+INDF                              00000000
+INICIAL                           0000002E
+INICIO                            0000008D
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+LOOP                              0000007A
+LUCES                             00000089
+MUESTRA                           00000053
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+NUMDISP                           00000028
+OBF                               00000006
+OERR                              00000001
+OPTION_REG                        00000081
+P                                 00000004
+PCFG0                             00000000
+PCFG1                             00000001
+PCFG2                             00000002
+PCFG3                             00000003
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PS0                               00000000
+MPASM  5.51                         RXBCD.ASM   6-10-2014  23:38:37         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSPIE                             00000007
+PSPIF                             00000007
+PSPMODE                           00000004
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RD0                               00000000
+RD1                               00000001
+RD2                               00000002
+RD3                               00000003
+RD4                               00000004
+RD5                               00000005
+RD6                               00000006
+RD7                               00000007
+RE0                               00000000
+RE1                               00000001
+RE2                               00000002
+READ_WRITE                        00000002
+RECIBO                            00000023
+MPASM  5.51                         RXBCD.ASM   6-10-2014  23:38:37         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RUTINA_AST                        00000040
+RUTINA_NUM                        00000050
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SEGUIR_ESPERANDO                  00000092
+SEN                               00000000
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+SUMADISPLAYS                      00000076
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TABLA                             00000065
+TABLADISP                         00000098
+TEMP_STATUS                       00000025
+TEMP_W                            00000024
+TESTEOTECLA                       00000036
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+MPASM  5.51                         RXBCD.ASM   6-10-2014  23:38:37         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRISD                             00000088
+TRISD0                            00000000
+TRISD1                            00000001
+TRISD2                            00000002
+TRISD3                            00000003
+TRISD4                            00000004
+TRISD5                            00000005
+TRISD6                            00000006
+TRISD7                            00000007
+TRISE                             00000089
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+MPASM  5.51                         RXBCD.ASM   6-10-2014  23:38:37         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRMT                              00000001
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+W                                 00000000
+WCOL                              00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00001FFF
+_CP_OFF                           00003FFF
+_CP_ON                            00001FFF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
+_WRT_256                          00003DFF
+_WRT_HALF                         000039FF
+_WRT_OFF                          00003FFF
+MPASM  5.51                         RXBCD.ASM   6-10-2014  23:38:37         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_XT_OSC                           00003FFD
+__16F877A                         00000001
+__DEBUG                           1
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   157
+Program Memory Words Free:  8035
+
+
+Errors   :     0
+Warnings :     1 reported,     0 suppressed
+Messages :    15 reported,     0 suppressed
+
+

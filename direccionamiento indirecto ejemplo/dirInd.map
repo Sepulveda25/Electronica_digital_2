@@ -1,0 +1,38 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed May 07 20:24:25 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x00004c
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000025      
+            38 out of 8454 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   CARGAR   0x000007    program     static D:\Facultad\Electronica digital 2\direccionamiento indirecto ejemplo\dirInd.asm
+                     CONF   0x000000    program     static D:\Facultad\Electronica digital 2\direccionamiento indirecto ejemplo\dirInd.asm
+                PEINCIPAL   0x00001b    program     static D:\Facultad\Electronica digital 2\direccionamiento indirecto ejemplo\dirInd.asm
+                     SIGO   0x00001f    program     static D:\Facultad\Electronica digital 2\direccionamiento indirecto ejemplo\dirInd.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     CONF   0x000000    program     static D:\Facultad\Electronica digital 2\direccionamiento indirecto ejemplo\dirInd.asm
+                   CARGAR   0x000007    program     static D:\Facultad\Electronica digital 2\direccionamiento indirecto ejemplo\dirInd.asm
+                PEINCIPAL   0x00001b    program     static D:\Facultad\Electronica digital 2\direccionamiento indirecto ejemplo\dirInd.asm
+                     SIGO   0x00001f    program     static D:\Facultad\Electronica digital 2\direccionamiento indirecto ejemplo\dirInd.asm
+
+

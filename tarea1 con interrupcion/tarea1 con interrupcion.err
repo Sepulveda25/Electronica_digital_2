@@ -1,0 +1,3 @@
+Warning[205] D:\FACULTAD\ELECTRONICA DIGITAL 2\TAREA1 CON INTERRUPCION\TAREA1 CON INTERRUPCION.ASM 1 : Found directive in column 1. (INCLUDE)
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TAREA1 CON INTERRUPCION\TAREA1 CON INTERRUPCION.ASM 52 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\FACULTAD\ELECTRONICA DIGITAL 2\TAREA1 CON INTERRUPCION\TAREA1 CON INTERRUPCION.ASM 54 : Register in operand not in bank 0.  Ensure that bank bits are correct.

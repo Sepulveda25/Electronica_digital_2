@@ -1,0 +1,40 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed May 14 15:06:53 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000030
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000017      
+            24 out of 8454 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     CERO   0x00000c    program     static D:\Facultad\Electronica digital 2\osc 1khz\ocs1Khz.asm
+                     CONF   0x000000    program     static D:\Facultad\Electronica digital 2\osc 1khz\ocs1Khz.asm
+                PRINCIPAL   0x00000b    program     static D:\Facultad\Electronica digital 2\osc 1khz\ocs1Khz.asm
+                   TIEMPO   0x000014    program     static D:\Facultad\Electronica digital 2\osc 1khz\ocs1Khz.asm
+                      UNO   0x000010    program     static D:\Facultad\Electronica digital 2\osc 1khz\ocs1Khz.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     CONF   0x000000    program     static D:\Facultad\Electronica digital 2\osc 1khz\ocs1Khz.asm
+                PRINCIPAL   0x00000b    program     static D:\Facultad\Electronica digital 2\osc 1khz\ocs1Khz.asm
+                     CERO   0x00000c    program     static D:\Facultad\Electronica digital 2\osc 1khz\ocs1Khz.asm
+                      UNO   0x000010    program     static D:\Facultad\Electronica digital 2\osc 1khz\ocs1Khz.asm
+                   TIEMPO   0x000014    program     static D:\Facultad\Electronica digital 2\osc 1khz\ocs1Khz.asm
+
+
